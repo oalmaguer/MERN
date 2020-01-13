@@ -13,17 +13,12 @@ app.set("port", process.env.PORT || 4000);
 app.use(morgan("dev")); //middleware funcion que se ejecuta antes de que lleguen las rutas
 app.use(express.json()); // cada que llega dato a servidor pasa por esta funcion
 //y si es formato json se puede acceder a el desde elc odigo del servidor, al igual que mandar
-if (process.env.NODE_ENV === "production") {
-}
+
 //Routes
 app.use("/api/tasks", require("./routes/task.routes")); //leyendo task routes
 // Static Files
 // console.log(path.join(__dirname, "public"));
-app.use(express.static(path.join(__dirname, "build")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "build", "index.html"));
-});
+app.use(express.static(path.join(__dirname, "public")));
 
 //start the server
 app.listen(app.get("port"), () => {
